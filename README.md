@@ -12,9 +12,7 @@
 
         import UIKit
 
-        class EnterCodeViewController: UIViewController, CodeInputViewDelegate, UIAlertViewDelegate {
-            // MARK: - UIViewController
-
+        class EnterCodeViewController: UIViewController, CodeInputViewDelegate {
             override func viewDidLoad() {
                 super.viewDidLoad()
 
@@ -26,18 +24,13 @@
                 codeInputView.becomeFirstResponder()
             }
 
-            // MARK: - CodeInputViewDelegate
-
             func codeInputView(codeInputView: CodeInputView, didFinishWithCode code: String) {
                 let title = code == "1234" ? "Correct!" : "Wrong!"
-                let alertView = UIAlertView(title: title, message: nil, delegate: self, cancelButtonTitle: "OK")
-                alertView.show()
-            }
-
-            // MARK: - UIAlertViewDelegate
-
-            func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
-                (view.viewWithTag(17) as! CodeInputView).clear()
+                let alert = UIAlertController(title: title, message: nil, preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: { _ in
+                    (self.view.viewWithTag(17) as! CodeInputView).clear()
+                }))
+                presentViewController(alert, animated: true, completion: nil)
             }
         }
 

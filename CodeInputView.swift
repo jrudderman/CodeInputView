@@ -4,6 +4,14 @@ class CodeInputView: UIView, UIKeyInput {
     var delegate: CodeInputViewDelegate?
     var nextTag = 1
 
+    // MARK: - UIResponder
+
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+
+    // MARK: - UIView
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -22,12 +30,6 @@ class CodeInputView: UIView, UIKeyInput {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    // MARK: - UIResponder
-
-    override func canBecomeFirstResponder() -> Bool {
-        return true
     }
 
     // MARK: - UIKeyInput
